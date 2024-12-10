@@ -10,11 +10,9 @@ public class Demo {
         String url = "http://113.164.228.218:8014/opencart/administrator/";
         ChromeDriver driver = new ChromeDriver();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver,"admin","admin");
         loginPage.openLoginPage(url);
-        loginPage.enterUserName("admin");
-        loginPage.enterPassword("admin");
-        loginPage.clickSubmit();
+        loginPage.login();
 
         HomePage homePage = new HomePage(driver);
         String name = homePage.getName();

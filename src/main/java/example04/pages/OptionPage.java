@@ -6,19 +6,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class OptionPage {
-    private WebDriver driver;
+public class OptionPage extends BasePage{
 
     public OptionPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void verifyTitlePage(){
-        WebElement title = driver.findElement(By.xpath("//li[@class='breadcrumb-item']//a[contains(text(),'Options')]"));
+        WebElement title = getWebElement("//li[@class='breadcrumb-item']//a[contains(text(),'Options')]");
         Assertions.assertTrue(title.isDisplayed());
     }
     public void clickEditOptionButton() throws InterruptedException {
-        WebElement addNewOption = driver.findElement(By.xpath("//tbody/tr[10]/td[4]/a[1]"));
+        WebElement addNewOption = getWebElement("//tbody/tr[10]/td[4]/a[1]");
         addNewOption.click();
         Thread.sleep(200);
     }
@@ -29,7 +28,7 @@ public class OptionPage {
     }
     public void clickSaveButton(){
         Actions actions = new Actions(driver);
-        WebElement saveButton = driver.findElement(By.cssSelector(".btn-primary"));
+        WebElement saveButton = getWebElement(By.cssSelector(".btn-primary"));
         actions.click(saveButton).perform();
     }
     public void verifyEditSuccessMess() throws InterruptedException {
@@ -37,8 +36,5 @@ public class OptionPage {
         WebElement message = getWebElement("//div[@class='alert alert-success alert-dismissible']");
         Assertions.assertEquals("Success: You have modified options!",message.getText());
         Thread.sleep(200);
-    }
-    private WebElement getWebElement(String locator){
-        return driver.findElement(By.xpath(locator));
     }
 }

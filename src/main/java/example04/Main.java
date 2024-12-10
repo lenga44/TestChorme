@@ -9,7 +9,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Main {
     private FirefoxDriver driver;
-
     @Test
     public void updateOrderOfAnOptionSuccess() throws InterruptedException {
         driver = new FirefoxDriver();
@@ -26,15 +25,12 @@ public class Main {
         String username = "admin";
         String password = "admin";
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver,username,password);
         loginPage.openLoginPage(url);
-        loginPage.enterUserName(username);
-        loginPage.enterPassword(password);
-        loginPage.clickSubmit();
+        loginPage.login();
     }
     public void openOptionPageSuccess() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
-        homePage.clickCatalogMenu();
         homePage.clickOptionItem();
 
         OptionPage optionPage = new OptionPage(driver);

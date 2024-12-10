@@ -4,27 +4,36 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage {
-    private WebDriver driver;
+public class LoginPage extends BasePage{
+    private String username;
+    private String password;
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
+    public LoginPage(WebDriver driver, String username, String password) {
+        super(driver);
+        this.username = username;
+        this.password = password;
     }
+
     public void openLoginPage(String url) throws InterruptedException {
         driver.get(url);
         Thread.sleep(2000);
     }
-    public void enterUserName(String username){
-        WebElement usernameElement = driver.findElement(By.xpath("//input[@name='username']"));
+    private void enterUserName(){
+        WebElement usernameElement = getWebElement("//input[@name='username']");
         usernameElement.sendKeys(username);
     }
-    public void enterPassword(String password){
-        WebElement passwordElement = driver.findElement(By.xpath("//input[@name='password']"));
+    private void enterPassword(){
+        WebElement passwordElement = getWebElement("//input[@name='password']");
         passwordElement.sendKeys(password);
     }
-    public void clickSubmit() throws InterruptedException {
-        WebElement submit = driver.findElement(By.xpath("//button[@type='submit']/i"));
+    private void clickSubmit() throws InterruptedException {
+        WebElement submit = getWebElement("//button[@type='submit']/i");
         submit.click();
         Thread.sleep(1000);
+    }
+    public void login() throws InterruptedException {
+        enterUserName();
+        enterPassword();
+        clickSubmit();
     }
 }
